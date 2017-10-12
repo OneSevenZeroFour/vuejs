@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="demo">
+			<xheader></xheader>
+			<p v-color="'blue'">{{name|ed}}</p>
+			<p v-color="'yellow'">{{name}}</p>
+		</div>
+		<script src="../js/vue.js"></script>
+		<script>
+			Vue.component("xheader",{
+				template:`
+					<div>
+						<header>头部组件</header>
+					</div>
+				`
+			})
+			Vue.filter("ed",function(input){
+				return input+"..."
+			})
+			Vue.directive("color",function(el,binding){
+				//$(el)
+				el.style.color = binding.value
+			})
+			new Vue({
+				el:"#demo",
+				data:{
+					name:"laoyao"
+				},
+				//ajax
+				mounted:function(){
+					var self = this;
+					setTimeout(function(){
+						self.name = "laoxie"
+					},1000)
+				}
+			})
+		</script>
+	</body>
+</html>
